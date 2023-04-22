@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ojrj7lel34jj"]
+[gd_scene load_steps=4 format=3 uid="uid://ojrj7lel34jj"]
 
 [ext_resource type="Script" path="res://Death/DeathScreen.gd" id="1_bj7v1"]
 [ext_resource type="Texture2D" uid="uid://dxynwxebg7kt2" path="res://intro/blackout.png" id="2_kw3to"]
+[ext_resource type="AudioStream" uid="uid://b2nmw8l2eon0t" path="res://Sounds/bell-ringing-02.mp3" id="3_5p5hj"]
 
 [node name="DeathScene" type="Node2D"]
 script = ExtResource("1_bj7v1")
@@ -25,5 +26,9 @@ one_shot = true
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5p5hj")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

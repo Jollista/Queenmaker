@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bppr2kycusjwb"]
+[gd_scene load_steps=5 format=3 uid="uid://i2tht2w22s37"]
 
 [ext_resource type="Script" path="res://StartMenu.gd" id="1_as7h1"]
 [ext_resource type="Texture2D" uid="uid://djblendlmexna" path="res://TitleScreen.png" id="2_00fvw"]
 [ext_resource type="Texture2D" uid="uid://dxynwxebg7kt2" path="res://intro/blackout.png" id="2_ombr1"]
-[ext_resource type="AudioStream" uid="uid://brj5wct7vlgok" path="res://beehive_at_night-61816.mp3" id="3_alnaq"]
+[ext_resource type="AudioStream" uid="uid://brj5wct7vlgok" path="res://Sounds/beehive_at_night-61816.mp3" id="4_dgd1g"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -43,7 +43,7 @@ layout_mode = 2
 text = "QUIT"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_alnaq")
+stream = ExtResource("4_dgd1g")
 autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

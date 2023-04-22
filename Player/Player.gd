@@ -21,6 +21,12 @@ enum {DEFAULT_SPRITE, ATTACK_SPRITE, AIR_SPRITE}
 # Animation player
 @onready var anim = $AnimationPlayer
 
+# Audio
+@onready var audio = $AudioStreamPlayer2D
+@export var attack_sfx = AudioStream.new()
+@export var damage_sfx = attack_sfx
+@export var jump_sfx = attack_sfx
+
 # Timer
 @onready var timer = $Timer
 
@@ -39,7 +45,10 @@ func _physics_process(delta):
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY # update velocity
+		# play jump sound effect
+		audio.set_stream(jump_sfx)
+		audio.play()
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("left", "right")
@@ -66,9 +75,12 @@ func flip(direction):
 
 # reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
-	anim.play("take_damage")
-	current_hp -= damage
-	if current_hp <= 0:
+	# play damage sound effect
+	audio.set_stream(damage_sfx)
+	audio.play()
+	anim.play("take_damage") # animate taking damage
+	current_hp -= damage # reduce hp
+	if current_hp <= 0: # check for death
 		die()
 
 func die():
@@ -78,6 +90,9 @@ func die():
 
 # attack!
 func attack():
+	# play attack sound effect
+	audio.set_stream(attack_sfx)
+	audio.play() 
 	sprite.frame = ATTACK_SPRITE # animate
 	timer.start() # start cooldown
 	

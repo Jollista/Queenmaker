@@ -28,6 +28,11 @@ enum {DEFAULT_SPRITE, ATTACK_SPRITE}
 # anim
 @onready var anim = $AnimationPlayer
 
+# Audio
+@onready var audio = $AudioStreamPlayer2D
+@export var attack_sfx = AudioStream.new()
+@export var damage_sfx = attack_sfx
+
 # Timer for attack
 @onready var timer = $Timer
 @export var telegraph_delay = 0.3
@@ -87,6 +92,9 @@ func turn():
 
 # attack and deal damage to things within range
 func attack(body):
+	# play attack sound effect
+	audio.set_stream(attack_sfx)
+	audio.play()
 	attacking = true # set attacking to true
 	sprite.frame = ATTACK_SPRITE # animate attack
 	timer.start(telegraph_delay) # start timer
@@ -103,9 +111,12 @@ func attack(body):
 
 # reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
-	anim.play("take_damage")
-	current_hp -= damage
-	if current_hp <= 0:
+	# play attack sound effect
+	audio.set_stream(attack_sfx)
+	audio.play()
+	anim.play("take_damage") # animate
+	current_hp -= damage # reduce hp
+	if current_hp <= 0: # check for death
 		die()
 
 func die():
