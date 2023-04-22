@@ -28,5 +28,9 @@ shape = SubResource("RectangleShape2D_dwuld")
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="EdgeCheck" type="RayCast2D" parent="."]
+position = Vector2(-22, 31)
+target_position = Vector2(0, 3)
+
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

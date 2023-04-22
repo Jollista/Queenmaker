@@ -7,6 +7,9 @@ var bodies_list = []
 var direction = -1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# raycast for checking if about to walk off ledge
+@onready var edge_check = $EdgeCheck
+
 # damage dealt with attack
 @export var damage = 1
 
@@ -67,12 +70,14 @@ func patrol(delta):
 
 # returns true if at the edge of a platform, else false
 func is_at_edge():
-	pass
+	print("is_at_edge?: ", not edge_check.is_colliding())
+	return not edge_check.is_colliding()
 
 # turns the drone around
 func turn():
-	sprite.flip_h = true # flip sprite
+	sprite.flip_h = !sprite.flip_h # flip sprite
 	attack_collider.position.x = -attack_collider.position.x # flip attack range
+	edge_check.position.x = -edge_check.position.x # flip edge_check
 	direction = -direction # change direction
 
 

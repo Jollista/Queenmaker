@@ -275,11 +275,11 @@ tile_set = SubResource("TileSet_ly1wc")
 format = 2
 layer_0/tile_data = PackedInt32Array(196605, 65536, 0, 196606, 65536, 0, 196607, 65536, 0, 131072, 65536, 0, 131073, 65536, 0, 131074, 65536, 0, 131075, 65536, 0, 196604, 65536, 0, 196603, 65536, 0, 196602, 65536, 0, 131076, 65536, 0, 131077, 65536, 0, 131078, 65536, 0, 196601, 65536, 0, 196600, 65536, 0, 131064, 65536, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_71q2r")]
-position = Vector2(1, -27)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_5ab8b")
 
 [node name="Drone" parent="." instance=ExtResource("4_5cpn1")]
-position = Vector2(81, -16)
+position = Vector2(81, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_71q2r")]
+position = Vector2(-38, -8)

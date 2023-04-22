@@ -11,13 +11,14 @@ const JUMP_VELOCITY = -400.0
 # Reference to sprite and enum of different frames
 @onready var sprite = $Sprite2D
 enum {DEFAULT_SPRITE, ATTACK_SPRITE, AIR_SPRITE}
+# Animation player
+@onready var anim = $AnimationPlayer
 
 # Timer
 @onready var timer = $Timer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -49,6 +50,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(damage):
+	anim.play("take_damage")
 	current_hp -= damage
 	if current_hp < 0:
 		die()
