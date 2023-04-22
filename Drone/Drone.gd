@@ -10,6 +10,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # raycast for checking if about to walk off ledge
 @onready var edge_check = $EdgeCheck
 
+# Variables for hp management
+@export var max_hp = 5
+@onready var current_hp = max_hp
 # damage dealt with attack
 @export var damage = 1
 
@@ -22,6 +25,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # sprite
 @onready var sprite = $Sprite2D
 enum {DEFAULT_SPRITE, ATTACK_SPRITE}
+# anim
+@onready var anim = $AnimationPlayer
 
 # Timer for attack
 @onready var timer = $Timer
@@ -96,3 +101,13 @@ func attack(body):
 	await timer.timeout # wait
 	attacking = false # reset attacking to false
 	sprite.frame = DEFAULT_SPRITE # reset sprite
+
+# reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
+func take_damage(damage):
+	anim.play("take_damage")
+	current_hp -= damage
+	if current_hp <= 0:
+		die()
+
+func die():
+	queue_free()

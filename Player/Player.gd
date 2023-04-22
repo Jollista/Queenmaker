@@ -13,6 +13,7 @@ const JUMP_VELOCITY = -400.0
 # Attack range and collider
 @onready var attack_range = $AttackRange
 @onready var attack_collider = $AttackRange/CollisionShape2D
+var bodies_list = []
 
 # Reference to sprite and enum of different frames
 @onready var sprite = $Sprite2D
@@ -50,11 +51,11 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, ACCEL) # if no movement inputs received, slow down
 	
 	if Input.is_action_just_pressed("attack") and timer.is_stopped():
-		sprite.frame = ATTACK_SPRITE
-		timer.start()
+		attack()
 
 	move_and_slide()
 
+# set player to face a given direction
 func flip(direction):
 	if direction < 0: # if going left
 		sprite.flip_h = true # face left
@@ -63,13 +64,31 @@ func flip(direction):
 		sprite.flip_h = false # face right
 		attack_collider.position.x = abs(attack_collider.position.x) # ensure position is positive/right
 
+# reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
 	anim.play("take_damage")
 	current_hp -= damage
-	if current_hp < 0:
+	if current_hp <= 0:
 		die()
 
 func die():
 	print("skullemoji lmao")
 	# reload the current scene
 	get_tree().change_scene_to_file("res://Death/DeathScene.tscn")
+
+# attack!
+func attack():
+	sprite.frame = ATTACK_SPRITE # animate
+	timer.start() # start cooldown
+	
+	# everything in range takes damage if able
+	for body in bodies_list:
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+
+# Keep bodies_list up to date with bodies in attack_range
+func _on_attack_range_body_entered(body):
+	if body.name != "Player": # ensure player doesn't get added to own bodies_list
+		bodies_list.append(body)
+func _on_attack_range_body_exited(body):
+	bodies_list.erase(body)

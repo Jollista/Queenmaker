@@ -71,3 +71,6 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_jcra0")
 }
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
