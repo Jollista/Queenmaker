@@ -9,7 +9,7 @@ size = Vector2(40, 52)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwuld"]
 size = Vector2(44, 39)
 
-[node name="Drone" type="RigidBody2D"]
+[node name="Drone" type="CharacterBody2D"]
 script = ExtResource("1_iv80h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
