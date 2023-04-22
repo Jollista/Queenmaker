@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3v3wylijttbi"]
+[gd_scene load_steps=7 format=3 uid="uid://b3v3wylijttbi"]
 
 [ext_resource type="Script" path="res://intro/Intro.gd" id="1_78hrx"]
 [ext_resource type="Texture2D" uid="uid://dxynwxebg7kt2" path="res://intro/blackout.png" id="1_a642l"]
 [ext_resource type="Texture2D" uid="uid://cedvnelvkggsy" path="res://intro/beeStoryComic.png" id="1_cfk8f"]
 [ext_resource type="AudioStream" uid="uid://d2k7u2d17xhgi" path="res://intro/page-flip-10.mp3" id="4_r6yvb"]
+[ext_resource type="Texture2D" uid="uid://6o0yy2hooq1x" path="res://intro/whiteout.png" id="5_emlub"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxvaj"]
+streams_count = 1
+random_pitch = 1.5
+stream_0/stream = ExtResource("4_r6yvb")
+stream_0/weight = 1.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_78hrx")
@@ -38,7 +45,24 @@ texture = ExtResource("1_a642l")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_r6yvb")
+stream = SubResource("AudioStreamRandomizer_sxvaj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.6, 0.6)
+
+[node name="TextBackground" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(741.5, -13)
+scale = Vector2(0.866, 2.064)
+texture = ExtResource("5_emlub")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 538.0
+offset_top = -513.0
+offset_right = 947.0
+offset_bottom = 487.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "TEST"
