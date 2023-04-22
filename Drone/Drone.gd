@@ -75,7 +75,6 @@ func patrol(delta):
 
 # returns true if at the edge of a platform, else false
 func is_at_edge():
-	print("is_at_edge?: ", not edge_check.is_colliding())
 	return not edge_check.is_colliding()
 
 # turns the drone around

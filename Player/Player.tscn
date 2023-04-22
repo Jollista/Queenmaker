@@ -8,7 +8,7 @@ radius = 17.0
 height = 66.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxtgf"]
-size = Vector2(42, 59)
+size = Vector2(50, 59)
 
 [sub_resource type="Animation" id="Animation_b8bp6"]
 resource_name = "take_damage"
@@ -60,7 +60,7 @@ shape = SubResource("CapsuleShape2D_1hh4v")
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(11, 2.5)
+position = Vector2(15, 2.5)
 shape = SubResource("RectangleShape2D_qxtgf")
 
 [node name="Timer" type="Timer" parent="."]
