@@ -3,7 +3,7 @@ extends CharacterBody2D
 var bodies_list = []
 
 # movement
-@export var speed = 50
+@export var speed = 25
 var direction = -1
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
