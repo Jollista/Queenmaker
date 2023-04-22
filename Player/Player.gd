@@ -8,6 +8,12 @@ const JUMP_VELOCITY = -400.0
 @export var max_hp = 5
 @onready var current_hp = max_hp
 
+# Variables for attacking
+@export var damage = 2
+# Attack range and collider
+@onready var attack_range = $AttackRange
+@onready var attack_collider = $AttackRange/CollisionShape2D
+
 # Reference to sprite and enum of different frames
 @onready var sprite = $Sprite2D
 enum {DEFAULT_SPRITE, ATTACK_SPRITE, AIR_SPRITE}
@@ -39,7 +45,7 @@ func _physics_process(delta):
 	if direction:
 		velocity.x += direction * ACCEL # accelerate
 		velocity.x = clampf(velocity.x, -SPEED, SPEED) # cap out at speed
-		sprite.flip_h = true if direction < 0 else false # flip sprite horizontally depending on direction
+		flip(direction) # flip if needed
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCEL) # if no movement inputs received, slow down
 	
@@ -48,6 +54,14 @@ func _physics_process(delta):
 		timer.start()
 
 	move_and_slide()
+
+func flip(direction):
+	if direction < 0: # if going left
+		sprite.flip_h = true # face left
+		attack_collider.position.x = -abs(attack_collider.position.x) # ensure position is negative/left
+	else:
+		sprite.flip_h = false # face right
+		attack_collider.position.x = abs(attack_collider.position.x) # ensure position is positive/right
 
 func take_damage(damage):
 	anim.play("take_damage")

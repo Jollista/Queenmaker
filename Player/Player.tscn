@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://nibm3bek5850"]
+[gd_scene load_steps=8 format=3 uid="uid://nibm3bek5850"]
 
 [ext_resource type="Texture2D" uid="uid://b0vubrfpv7p0c" path="res://Player/PlayerSprite.png" id="1_24qt4"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_esvg1"]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1hh4v"]
 radius = 17.0
 height = 66.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxtgf"]
+size = Vector2(42, 59)
 
 [sub_resource type="Animation" id="Animation_b8bp6"]
 resource_name = "take_damage"
@@ -49,9 +52,16 @@ script = ExtResource("1_esvg1")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_24qt4")
 hframes = 3
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1hh4v")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(11, 2.5)
+shape = SubResource("RectangleShape2D_qxtgf")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
