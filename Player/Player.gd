@@ -8,6 +8,9 @@ const JUMP_VELOCITY = -400.0
 @onready var sprite = $Sprite2D
 enum {DEFAULT_SPRITE, ATTACK_SPRITE, AIR_SPRITE}
 
+# Timer
+@onready var timer = $Timer
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -15,9 +18,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		sprite.frame = AIR_SPRITE # animate jump/fall
+		if timer.is_stopped(): # prioritize attack sprite
+			sprite.frame = AIR_SPRITE # animate jump/fall
 		velocity.y += gravity * delta
-	else:
+	elif timer.is_stopped(): # prioritize attack sprite:
 		sprite.frame = DEFAULT_SPRITE # animate default on-floor
 	
 
@@ -28,10 +32,14 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		velocity.x += direction * ACCEL
-		velocity.x = clampf(velocity.x, -SPEED, SPEED)
+		velocity.x += direction * ACCEL # accelerate
+		velocity.x = clampf(velocity.x, -SPEED, SPEED) # cap out at speed
 		sprite.flip_h = true if direction < 0 else false # flip sprite horizontally depending on direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCEL) # if no movement inputs received, slow down
+	
+	if Input.is_action_just_pressed("attack") and timer.is_stopped():
+		sprite.frame = ATTACK_SPRITE
+		timer.start()
 
 	move_and_slide()
