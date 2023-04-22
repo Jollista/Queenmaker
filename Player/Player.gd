@@ -4,6 +4,10 @@ const SPEED = 300.0
 const ACCEL = 50.0
 const JUMP_VELOCITY = -400.0
 
+# Variables for hp management
+@export var max_hp = 5
+@onready var current_hp = max_hp
+
 # Reference to sprite and enum of different frames
 @onready var sprite = $Sprite2D
 enum {DEFAULT_SPRITE, ATTACK_SPRITE, AIR_SPRITE}
@@ -43,3 +47,13 @@ func _physics_process(delta):
 		timer.start()
 
 	move_and_slide()
+
+func take_damage(damage):
+	current_hp -= damage
+	if current_hp < 0:
+		die()
+
+func die():
+	print("skullemoji lmao")
+	# reload the current scene
+	get_tree().change_scene_to_file("res://Death/DeathScene.tscn")

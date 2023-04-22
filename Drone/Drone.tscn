@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://072cpyte1q04"]
+
+[ext_resource type="Texture2D" uid="uid://c3fqp8k7d81k2" path="res://Drone/droneSprite.png" id="1_6gnhy"]
+[ext_resource type="Script" path="res://Drone/Drone.gd" id="1_iv80h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lm5r7"]
+size = Vector2(40, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwuld"]
+size = Vector2(44, 39)
+
+[node name="Drone" type="RigidBody2D"]
+script = ExtResource("1_iv80h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6gnhy")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 6)
+shape = SubResource("RectangleShape2D_lm5r7")
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(-12, 8.5)
+shape = SubResource("RectangleShape2D_dwuld")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

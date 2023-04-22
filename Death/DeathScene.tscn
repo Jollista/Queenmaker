@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ojrj7lel34jj"]
+
+[ext_resource type="Script" path="res://Death/DeathScreen.gd" id="1_bj7v1"]
+[ext_resource type="Texture2D" uid="uid://dxynwxebg7kt2" path="res://intro/blackout.png" id="2_kw3to"]
+
+[node name="DeathScene" type="Node2D"]
+script = ExtResource("1_bj7v1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1920, 1080)
+texture = ExtResource("2_kw3to")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -205.0
+offset_top = -10.0
+offset_right = 236.0
+offset_bottom = 92.0
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[shake level=10][center]YOU DIED[/center][/shake]"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

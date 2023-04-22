@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5nussue2udsh"]
+[gd_scene load_steps=7 format=3 uid="uid://c5nussue2udsh"]
 
 [ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="1_uljgu"]
 [ext_resource type="PackedScene" uid="uid://nibm3bek5850" path="res://Player/Player.tscn" id="2_71q2r"]
 [ext_resource type="Script" path="res://levels/FollowPlayerCamera.gd" id="3_5ab8b"]
+[ext_resource type="PackedScene" uid="uid://072cpyte1q04" path="res://Drone/Drone.tscn" id="4_5cpn1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fwm6"]
 texture = ExtResource("1_uljgu")
@@ -279,3 +280,6 @@ position = Vector2(1, -27)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_5ab8b")
+
+[node name="Drone" parent="." instance=ExtResource("4_5cpn1")]
+position = Vector2(81, -16)
