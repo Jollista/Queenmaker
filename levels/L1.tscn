@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5nussue2udsh"]
+[gd_scene load_steps=8 format=3 uid="uid://c5nussue2udsh"]
 
 [ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="1_uljgu"]
 [ext_resource type="PackedScene" uid="uid://nibm3bek5850" path="res://Player/Player.tscn" id="2_71q2r"]
 [ext_resource type="Script" path="res://levels/FollowPlayerCamera.gd" id="3_5ab8b"]
 [ext_resource type="PackedScene" uid="uid://072cpyte1q04" path="res://Drone/Drone.tscn" id="4_5cpn1"]
+[ext_resource type="PackedScene" uid="uid://dysr02xya7omk" path="res://UI/UI.tscn" id="5_jdrtd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fwm6"]
 texture = ExtResource("1_uljgu")
@@ -283,3 +284,8 @@ position = Vector2(81, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_71q2r")]
 position = Vector2(-38, -8)
+
+[node name="UI" parent="." instance=ExtResource("5_jdrtd")]
+follow_viewport_enabled = false
+
+[connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]

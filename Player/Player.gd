@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -400.0
 # Variables for hp management
 @export var max_hp = 5
 @onready var current_hp = max_hp
+signal health_changed
 
 # Variables for attacking
 @export var damage = 2
@@ -82,6 +83,8 @@ func take_damage(damage):
 	current_hp -= damage # reduce hp
 	if current_hp <= 0: # check for death
 		die()
+	
+	health_changed.emit() # emit signal if not dead
 
 func die():
 	print("skullemoji lmao")
