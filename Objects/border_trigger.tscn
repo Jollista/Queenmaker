@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp4q5mkjurm0r"]
+
+[ext_resource type="Script" path="res://Objects/BorderTrigger.gd" id="1_cxt8k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4c6ch"]
+
+[node name="BorderTrigger" type="Area2D"]
+script = ExtResource("1_cxt8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4c6ch")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

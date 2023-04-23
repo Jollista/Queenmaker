@@ -112,7 +112,7 @@ func attack(body):
 # reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
 	# play attack sound effect
-	audio.set_stream(attack_sfx)
+	audio.set_stream(damage_sfx)
 	audio.play()
 	anim.play("take_damage") # animate
 	current_hp -= damage # reduce hp

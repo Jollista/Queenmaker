@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dysr02xya7omk"]
 
-[ext_resource type="Texture2D" uid="uid://b5txm2s87vm5r" path="res://UI/HealthIndicator.png" id="1_o0qgg"]
+[ext_resource type="Texture2D" uid="uid://ceh50ntgqu5u2" path="res://UI/HealthIndicator.png" id="1_o0qgg"]
 [ext_resource type="Script" path="res://UI/UI.gd" id="1_yihrh"]
 
 [node name="UI" type="CanvasLayer"]
