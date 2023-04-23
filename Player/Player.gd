@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const ACCEL = 50.0
 const JUMP_VELOCITY = -500.0
+const JUMPS = 2
+var jumps_remaining = JUMPS
 
 # Variables for hp management
 @export var max_hp = 5
@@ -43,9 +45,13 @@ func _physics_process(delta):
 	elif timer.is_stopped(): # prioritize attack sprite:
 		sprite.frame = DEFAULT_SPRITE # animate default on-floor
 	
-
+	# Reset jumps remaining if on ground
+	if is_on_floor():
+		jumps_remaining = JUMPS
+	
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and jumps_remaining > 0:
+		jumps_remaining -= 1 # decrement remaining jumps
 		velocity.y = JUMP_VELOCITY # update velocity
 		# play jump sound effect
 		audio.set_stream(jump_sfx)
