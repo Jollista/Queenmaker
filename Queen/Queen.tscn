@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://27kl8ds1trbn"]
 
 [ext_resource type="Script" path="res://Queen/Queen.gd" id="1_g6wu5"]
-[ext_resource type="Texture2D" uid="uid://c2wf4xmwdy3yd" path="res://Queen/QueenSprite.png" id="2_ato6o"]
+[ext_resource type="Texture2D" uid="uid://c0fxysh5hjb6g" path="res://Queen/QueenSprite.png" id="2_ato6o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76uv1"]
 radius = 32.0

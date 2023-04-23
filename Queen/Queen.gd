@@ -2,6 +2,9 @@ extends RigidBody2D
 
 @export var current_hp = 18 # 3 * player's damage (2)
 
+# Timer
+@onready var timer = $Timer
+
 # FLUFF
 # audio
 @onready var audio = $AudioStreamPlayer2D
@@ -10,6 +13,15 @@ extends RigidBody2D
 
 # anim
 @onready var anim = $AnimationPlayer
+
+# Borders
+@export var left_border = -1
+@export var right_border = 1
+
+# !! ATTACK OBJECTS !!
+# Red kill ya always, blue kill ya if you're movin'
+# reference to moving_spike tscn
+var MovingSpike = preload("res://Objects/moving_spike.tscn")
 
 func start_boss_fight():
 	pass
@@ -28,4 +40,24 @@ func die():
 	queue_free()
 	# transition to end cutscene
 
-# ATTACK PATTERNS
+### ATTACK OBJECT CREATION ###
+# creates a spike that moves
+func create_moving_spike(spike_position=Vector2(450,0), spike_scale=Vector2(1,10), speed=15, direction=-1, vertical=false):
+	# create new MovingSpike instance
+	var spike_instance
+	spike_instance = MovingSpike.instantiate()
+	
+	# initialize it
+	spike_instance.position = spike_position
+	spike_instance.apply_scale(spike_scale)
+	spike_instance.speed = speed
+	spike_instance.direction = direction
+	spike_instance.vertical = vertical
+	
+	# add spike_instance to scene
+	get_parent().call_deferred("add_child", spike_instance)
+	
+	# return spike_instance
+	return spike_instance
+
+### ATTACK PATTERNS ###

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5nussue2udsh"]
+[gd_scene load_steps=11 format=3 uid="uid://c5nussue2udsh"]
 
 [ext_resource type="Script" path="res://levels/L1.gd" id="1_qgh6m"]
 [ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="1_uljgu"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://072cpyte1q04" path="res://Drone/Drone.tscn" id="4_5cpn1"]
 [ext_resource type="PackedScene" uid="uid://dysr02xya7omk" path="res://UI/UI.tscn" id="5_jdrtd"]
 [ext_resource type="PackedScene" uid="uid://dp4q5mkjurm0r" path="res://Objects/border_trigger.tscn" id="6_l1wsb"]
+[ext_resource type="PackedScene" uid="uid://27kl8ds1trbn" path="res://Queen/Queen.tscn" id="8_lic35"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7fwm6"]
 texture = ExtResource("1_uljgu")
@@ -313,6 +314,9 @@ follow_viewport_enabled = false
 position = Vector2(4331, -96)
 scale = Vector2(1, 10)
 tag = "boss_arena"
+
+[node name="RigidBody2D" parent="." instance=ExtResource("8_lic35")]
+position = Vector2(-491, -8035)
 
 [connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]
 [connection signal="border_crossed" from="BorderTrigger" to="." method="_on_border_trigger_border_crossed"]
