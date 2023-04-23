@@ -4,6 +4,8 @@ extends RigidBody2D
 
 # Timer
 @onready var timer = $Timer
+# Collision shape
+@onready var collision = $CollisionShape2D
 
 # FLUFF
 # audio
@@ -29,8 +31,24 @@ var MovingSpike = preload("res://Objects/moving_spike.tscn")
 signal attack_ended
 
 func start_boss_fight():
-	print("Makin' it rain")
-	make_it_rain()
+	while current_hp > 0:
+		print("Makin' it rain")
+		make_it_rain()
+		await attack_ended
+		
+		print("Makin' it rain")
+		make_it_rain(true)
+		await attack_ended
+
+# disappear and disable hitbox
+func disappear():
+	collision.set_deferred("disabled", true)
+	visible = false
+
+# reappear and reenable hitbox
+func reappear():
+	collision.set_deferred("disabled", false)
+	visible = true
 
 # reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
@@ -68,14 +86,24 @@ func create_moving_spike(spike_position=Vector2(450,0), spike_scale=Vector2(1,10
 
 ### ATTACK PATTERNS ###
 # summon vertical and horizontal lasers to hit all 9 squares of the play area
-func make_it_rain():
+func make_it_rain(reverse=false, delay=1):
 	# reference to spike_instance for signals
 	var spike_instance
 	
-	spike_instance = create_moving_spike(Vector2(center.x, top_border), Vector2(10,1), 10, 1, true)
+	# step by which x_pos moves for each spike
+	var increment = 50
+	increment = -increment if reverse else increment
+	
+	# x position of each spike
+	var x_pos = right_border if reverse else left_border
+	
+	for i in 3:
+		create_moving_spike(Vector2(x_pos, top_border), Vector2(10,1), 10, 1, true)
+		x_pos += increment
 	
 	# wait for spike_instance to be deleted
-	await spike_instance.tree_exited
+	timer.start(delay)
+	await timer.timeout
 	
 	# emit signal
 	attack_ended.emit()

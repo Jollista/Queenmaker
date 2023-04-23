@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5nussue2udsh"]
+[gd_scene load_steps=13 format=3 uid="uid://c5nussue2udsh"]
 
 [ext_resource type="Script" path="res://levels/L1.gd" id="1_qgh6m"]
 [ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="1_uljgu"]
 [ext_resource type="PackedScene" uid="uid://nibm3bek5850" path="res://Player/Player.tscn" id="2_71q2r"]
+[ext_resource type="AudioStream" uid="uid://bggc1g4tqybs7" path="res://Sounds/Bonfire.mp3" id="2_jobbq"]
 [ext_resource type="Script" path="res://levels/FollowPlayerCamera.gd" id="3_5ab8b"]
+[ext_resource type="AudioStream" uid="uid://purv3pc4w8oq" path="res://Sounds/Rimsky-Korsakov-The-Flight-of-the-Bumble-Bee-CLA014201.mp3" id="3_inrb7"]
 [ext_resource type="PackedScene" uid="uid://072cpyte1q04" path="res://Drone/Drone.tscn" id="4_5cpn1"]
 [ext_resource type="PackedScene" uid="uid://dysr02xya7omk" path="res://UI/UI.tscn" id="5_jdrtd"]
 [ext_resource type="PackedScene" uid="uid://dp4q5mkjurm0r" path="res://Objects/border_trigger.tscn" id="6_l1wsb"]
@@ -274,6 +276,8 @@ sources/0 = SubResource("TileSetAtlasSource_7fwm6")
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_qgh6m")
+ambient_music = ExtResource("2_jobbq")
+boss_music = ExtResource("3_inrb7")
 metadata/_edit_horizontal_guides_ = []
 
 [node name="TileMap" type="TileMap" parent="."]
