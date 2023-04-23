@@ -60,9 +60,10 @@ func take_damage(damage):
 	if current_hp <= 0: # check for death
 		die()
 
+# die and change scene to outro
 func die():
 	queue_free()
-	# transition to end cutscene
+	get_tree().change_scene_to_file("res://intro/Outro.tscn")
 
 ### ATTACK OBJECT CREATION ###
 # creates a spike that moves
@@ -91,15 +92,18 @@ func make_it_rain(reverse=false, delay=1):
 	var spike_instance
 	
 	# step by which x_pos moves for each spike
-	var increment = 50
-	increment = -increment if reverse else increment
+	var x_increment = 225
+	x_increment = -x_increment if reverse else x_increment
+	var y_increment = -100
 	
 	# x position of each spike
 	var x_pos = right_border if reverse else left_border
+	var y_pos = top_border
 	
-	for i in 3:
-		create_moving_spike(Vector2(x_pos, top_border), Vector2(10,1), 10, 1, true)
-		x_pos += increment
+	for i in 10:
+		create_moving_spike(Vector2(x_pos, y_pos), Vector2(3,1), 6, 1, true)
+		x_pos += x_increment
+		y_pos += y_increment
 	
 	# wait for spike_instance to be deleted
 	timer.start(delay)

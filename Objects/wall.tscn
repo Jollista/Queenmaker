@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bha1kas3e0gdj"]
+
+[ext_resource type="Script" path="res://Objects/Wall.gd" id="1_8nuxs"]
+[ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="2_m7ngm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d26jn"]
+size = Vector2(128, 128)
+
+[node name="Wall" type="RigidBody2D"]
+lock_rotation = true
+freeze = true
+script = ExtResource("1_8nuxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_m7ngm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d26jn")
+disabled = true

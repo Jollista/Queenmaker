@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjgarm3yc1cgb"]
+
+[ext_resource type="Texture2D" uid="uid://dxynwxebg7kt2" path="res://intro/blackout.png" id="2_6gd1y"]
+[ext_resource type="Texture2D" uid="uid://cc5s6t4mffapv" path="res://intro/beeStoryOutroPanel.png" id="2_sqtwf"]
+[ext_resource type="AudioStream" uid="uid://d2k7u2d17xhgi" path="res://intro/page-flip-10.mp3" id="4_xq4rt"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_sxvaj"]
+streams_count = 1
+random_pitch = 1.5
+stream_0/stream = ExtResource("4_xq4rt")
+stream_0/weight = 1.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(50, 50)
+texture = ExtResource("2_6gd1y")
+
+[node name="Story" type="Sprite2D" parent="."]
+texture = ExtResource("2_sqtwf")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_sxvaj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -984.0
+offset_top = 419.0
+offset_right = 956.0
+offset_bottom = 535.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]THANKS FOR PLAYING[/center]"
