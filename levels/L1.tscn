@@ -315,8 +315,20 @@ position = Vector2(4331, -96)
 scale = Vector2(1, 10)
 tag = "boss_arena"
 
-[node name="RigidBody2D" parent="." instance=ExtResource("8_lic35")]
+[node name="BorderTrigger2" parent="." instance=ExtResource("6_l1wsb")]
+position = Vector2(-600, -8059)
+scale = Vector2(1, 10)
+tag = "boss_arena"
+
+[node name="Queen" parent="." instance=ExtResource("8_lic35")]
 position = Vector2(-491, -8035)
+left_border = -1500
+right_border = 0
+top_border = -8375
+center = Vector2(-500, -8000)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="health_changed" from="Player" to="UI" method="_on_player_health_changed"]
 [connection signal="border_crossed" from="BorderTrigger" to="." method="_on_border_trigger_border_crossed"]
+[connection signal="border_crossed" from="BorderTrigger2" to="." method="_on_border_trigger_border_crossed"]

@@ -15,16 +15,22 @@ extends RigidBody2D
 @onready var anim = $AnimationPlayer
 
 # Borders
-@export var left_border = -1
-@export var right_border = 1
+@export var left_border = -1 # left edge of boss arena
+@export var right_border = 1 # right edge of boss arena
+@export var top_border = 1 # top border of boss arena
+@export var center = Vector2.ZERO # center of boss arena
 
 # !! ATTACK OBJECTS !!
 # Red kill ya always, blue kill ya if you're movin'
 # reference to moving_spike tscn
 var MovingSpike = preload("res://Objects/moving_spike.tscn")
 
+# emitted when attack pattern finishes
+signal attack_ended
+
 func start_boss_fight():
-	pass
+	print("Makin' it rain")
+	make_it_rain()
 
 # reduce current_hp by a given amount of damage, and check if dead (hp <= 0)
 func take_damage(damage):
@@ -42,7 +48,7 @@ func die():
 
 ### ATTACK OBJECT CREATION ###
 # creates a spike that moves
-func create_moving_spike(spike_position=Vector2(450,0), spike_scale=Vector2(1,10), speed=15, direction=-1, vertical=false):
+func create_moving_spike(spike_position=Vector2(450,0), spike_scale=Vector2(1,10), speed=10, direction=-1, vertical=false):
 	# create new MovingSpike instance
 	var spike_instance
 	spike_instance = MovingSpike.instantiate()
@@ -61,3 +67,15 @@ func create_moving_spike(spike_position=Vector2(450,0), spike_scale=Vector2(1,10
 	return spike_instance
 
 ### ATTACK PATTERNS ###
+# summon vertical and horizontal lasers to hit all 9 squares of the play area
+func make_it_rain():
+	# reference to spike_instance for signals
+	var spike_instance
+	
+	spike_instance = create_moving_spike(Vector2(center.x, top_border), Vector2(10,1), 10, 1, true)
+	
+	# wait for spike_instance to be deleted
+	await spike_instance.tree_exited
+	
+	# emit signal
+	attack_ended.emit()

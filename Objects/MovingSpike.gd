@@ -3,7 +3,7 @@ extends Area2D
 # damage to be dealt
 var damage = 1
 # speed spike moves
-var speed = 15
+var speed = 10
 # direction spike goes (-1 = left, 1 = right)
 var direction = -1
 # vertical if true, else horizontal
@@ -14,7 +14,7 @@ var right_border = 3880
 
 # if mortal, take damage
 func _on_body_entered(body):
-	if body.has_method("take_damage"):
+	if body.name == "Player":
 		body.take_damage(damage)
 
 # constantly move in a given horizontal direction (left by default)

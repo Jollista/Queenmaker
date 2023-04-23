@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ci4bdr8r22ryi"]
+[gd_scene load_steps=4 format=3 uid="uid://ci4bdr8r22ryi"]
 
 [ext_resource type="Script" path="res://Objects/MovingSpike.gd" id="1_gs0se"]
+[ext_resource type="Texture2D" uid="uid://b6haxf2m2hy3i" path="res://icon.svg" id="2_gyhe0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7hmq"]
+size = Vector2(64, 64)
 
 [node name="MovingSpike" type="Area2D"]
 script = ExtResource("1_gs0se")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_gyhe0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m7hmq")

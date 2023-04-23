@@ -43,7 +43,7 @@ _data = {
 "take_damage": SubResource("Animation_x38sq")
 }
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Queen" type="RigidBody2D"]
 freeze = true
 script = ExtResource("1_g6wu5")
 
