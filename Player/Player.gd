@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const ACCEL = 50.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -500.0
 
 # Variables for hp management
 @export var max_hp = 5
